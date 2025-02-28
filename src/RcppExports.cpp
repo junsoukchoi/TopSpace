@@ -11,55 +11,130 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// rcpparma_hello_world
-arma::mat rcpparma_hello_world();
-RcppExport SEXP _TopSpace_rcpparma_hello_world() {
+// calculate_n_kh
+arma::mat calculate_n_kh(const ListOf<IntegerVector>& X, const ListOf<IntegerVector>& Z, int H, int K);
+RcppExport SEXP _TopSpace_calculate_n_kh(SEXP XSEXP, SEXP ZSEXP, SEXP HSEXP, SEXP KSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(rcpparma_hello_world());
+    Rcpp::traits::input_parameter< const ListOf<IntegerVector>& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const ListOf<IntegerVector>& >::type Z(ZSEXP);
+    Rcpp::traits::input_parameter< int >::type H(HSEXP);
+    Rcpp::traits::input_parameter< int >::type K(KSEXP);
+    rcpp_result_gen = Rcpp::wrap(calculate_n_kh(X, Z, H, K));
     return rcpp_result_gen;
 END_RCPP
 }
-// rcpparma_outerproduct
-arma::mat rcpparma_outerproduct(const arma::colvec& x);
-RcppExport SEXP _TopSpace_rcpparma_outerproduct(SEXP xSEXP) {
+// calculate_m_ik
+arma::mat calculate_m_ik(const ListOf<IntegerVector>& Z, int K);
+RcppExport SEXP _TopSpace_calculate_m_ik(SEXP ZSEXP, SEXP KSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::colvec& >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(rcpparma_outerproduct(x));
+    Rcpp::traits::input_parameter< const ListOf<IntegerVector>& >::type Z(ZSEXP);
+    Rcpp::traits::input_parameter< int >::type K(KSEXP);
+    rcpp_result_gen = Rcpp::wrap(calculate_m_ik(Z, K));
     return rcpp_result_gen;
 END_RCPP
 }
-// rcpparma_innerproduct
-double rcpparma_innerproduct(const arma::colvec& x);
-RcppExport SEXP _TopSpace_rcpparma_innerproduct(SEXP xSEXP) {
+// update_Z
+List update_Z(const ListOf<IntegerVector>& Z, const ListOf<IntegerVector>& X, const arma::mat& theta, const arma::mat& n_kh, const arma::mat& m_ik, const arma::vec& gamma);
+RcppExport SEXP _TopSpace_update_Z(SEXP ZSEXP, SEXP XSEXP, SEXP thetaSEXP, SEXP n_khSEXP, SEXP m_ikSEXP, SEXP gammaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::colvec& >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(rcpparma_innerproduct(x));
+    Rcpp::traits::input_parameter< const ListOf<IntegerVector>& >::type Z(ZSEXP);
+    Rcpp::traits::input_parameter< const ListOf<IntegerVector>& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type n_kh(n_khSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type m_ik(m_ikSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type gamma(gammaSEXP);
+    rcpp_result_gen = Rcpp::wrap(update_Z(Z, X, theta, n_kh, m_ik, gamma));
     return rcpp_result_gen;
 END_RCPP
 }
-// rcpparma_bothproducts
-Rcpp::List rcpparma_bothproducts(const arma::colvec& x);
-RcppExport SEXP _TopSpace_rcpparma_bothproducts(SEXP xSEXP) {
+// update_beta
+arma::mat update_beta(const arma::mat& n_kh, const arma::vec& gamma);
+RcppExport SEXP _TopSpace_update_beta(SEXP n_khSEXP, SEXP gammaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::colvec& >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(rcpparma_bothproducts(x));
+    Rcpp::traits::input_parameter< const arma::mat& >::type n_kh(n_khSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type gamma(gammaSEXP);
+    rcpp_result_gen = Rcpp::wrap(update_beta(n_kh, gamma));
+    return rcpp_result_gen;
+END_RCPP
+}
+// update_alpha
+arma::mat update_alpha(const arma::mat& m_ik, const arma::mat& theta);
+RcppExport SEXP _TopSpace_update_alpha(SEXP m_ikSEXP, SEXP thetaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type m_ik(m_ikSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type theta(thetaSEXP);
+    rcpp_result_gen = Rcpp::wrap(update_alpha(m_ik, theta));
+    return rcpp_result_gen;
+END_RCPP
+}
+// dU_tilde
+arma::mat dU_tilde(const arma::mat& B, const arma::mat& alpha, const arma::mat& theta, const arma::mat& Bases, const arma::vec& lambda, int n_subsample);
+RcppExport SEXP _TopSpace_dU_tilde(SEXP BSEXP, SEXP alphaSEXP, SEXP thetaSEXP, SEXP BasesSEXP, SEXP lambdaSEXP, SEXP n_subsampleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type B(BSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type Bases(BasesSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< int >::type n_subsample(n_subsampleSEXP);
+    rcpp_result_gen = Rcpp::wrap(dU_tilde(B, alpha, theta, Bases, lambda, n_subsample));
+    return rcpp_result_gen;
+END_RCPP
+}
+// update_B
+List update_B(const arma::mat& B, const arma::vec& nu, const arma::mat& alpha, const arma::mat& Bases, const arma::vec& lambda, int n_leapfrog, int n_subsample, double rho, double eta);
+RcppExport SEXP _TopSpace_update_B(SEXP BSEXP, SEXP nuSEXP, SEXP alphaSEXP, SEXP BasesSEXP, SEXP lambdaSEXP, SEXP n_leapfrogSEXP, SEXP n_subsampleSEXP, SEXP rhoSEXP, SEXP etaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type B(BSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type nu(nuSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type Bases(BasesSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< int >::type n_leapfrog(n_leapfrogSEXP);
+    Rcpp::traits::input_parameter< int >::type n_subsample(n_subsampleSEXP);
+    Rcpp::traits::input_parameter< double >::type rho(rhoSEXP);
+    Rcpp::traits::input_parameter< double >::type eta(etaSEXP);
+    rcpp_result_gen = Rcpp::wrap(update_B(B, nu, alpha, Bases, lambda, n_leapfrog, n_subsample, rho, eta));
+    return rcpp_result_gen;
+END_RCPP
+}
+// calculate_deviance
+double calculate_deviance(const ListOf<IntegerVector>& X, const arma::mat& beta, const arma::mat& alpha);
+RcppExport SEXP _TopSpace_calculate_deviance(SEXP XSEXP, SEXP betaSEXP, SEXP alphaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const ListOf<IntegerVector>& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type alpha(alphaSEXP);
+    rcpp_result_gen = Rcpp::wrap(calculate_deviance(X, beta, alpha));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_TopSpace_rcpparma_hello_world", (DL_FUNC) &_TopSpace_rcpparma_hello_world, 0},
-    {"_TopSpace_rcpparma_outerproduct", (DL_FUNC) &_TopSpace_rcpparma_outerproduct, 1},
-    {"_TopSpace_rcpparma_innerproduct", (DL_FUNC) &_TopSpace_rcpparma_innerproduct, 1},
-    {"_TopSpace_rcpparma_bothproducts", (DL_FUNC) &_TopSpace_rcpparma_bothproducts, 1},
+    {"_TopSpace_calculate_n_kh", (DL_FUNC) &_TopSpace_calculate_n_kh, 4},
+    {"_TopSpace_calculate_m_ik", (DL_FUNC) &_TopSpace_calculate_m_ik, 2},
+    {"_TopSpace_update_Z", (DL_FUNC) &_TopSpace_update_Z, 6},
+    {"_TopSpace_update_beta", (DL_FUNC) &_TopSpace_update_beta, 2},
+    {"_TopSpace_update_alpha", (DL_FUNC) &_TopSpace_update_alpha, 2},
+    {"_TopSpace_dU_tilde", (DL_FUNC) &_TopSpace_dU_tilde, 6},
+    {"_TopSpace_update_B", (DL_FUNC) &_TopSpace_update_B, 9},
+    {"_TopSpace_calculate_deviance", (DL_FUNC) &_TopSpace_calculate_deviance, 3},
     {NULL, NULL, 0}
 };
 
