@@ -1,0 +1,12 @@
+Package: TopSpace
+Type: Package
+Title: Bayesian spatial topic model for unsupervised discovery of multicellular spatial tissue structures in multiplex imaging
+Version: 1.0
+Date: 2025-02-28
+Author: Junsouk Choi
+Maintainer: Junsouk Choi <junsouk@umich.edu>
+Description: An efficient Markov chain Monte Carlo algorithm for TopSpace, a novel Bayesian spatial topic model for unsupervised discovery of multicellular spatial tissue structures in multiplex imaging.
+License: GPL (>= 2)
+Encoding: UTF-8
+Imports: Rcpp (>= 1.0.14)
+LinkingTo: Rcpp, RcppArmadillo
