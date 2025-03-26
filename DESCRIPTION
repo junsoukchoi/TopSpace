@@ -12,3 +12,6 @@ Imports: Rcpp (>= 1.0.14), BayesGPfit
 Remotes: clintpgeorge/ldamcmc
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 7.3.1
+Depends: 
+    R (>= 2.10)
+LazyData: true
