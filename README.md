@@ -41,7 +41,29 @@ library(ggplot2)
 library(ggforce)
 library(MBA)
 library(fields)
+```
 
+    ## Loading required package: spam
+
+    ## Spam version 2.10-0 (2023-10-23) is loaded.
+    ## Type 'help( Spam)' or 'demo( spam)' for a short introduction 
+    ## and overview of this package.
+    ## Help for individual functions is also obtained by adding the
+    ## suffix '.spam' to the function name, e.g. 'help( chol.spam)'.
+
+    ## 
+    ## Attaching package: 'spam'
+
+    ## The following objects are masked from 'package:base':
+    ## 
+    ##     backsolve, forwardsolve
+
+    ## Loading required package: viridisLite
+
+    ## 
+    ## Try help(fields) to get started.
+
+``` r
 # set random seed
 set.seed(2024)
 
