@@ -5,17 +5,20 @@
 \alias{NSCLC}
 \title{Non-small Cell Lung Cancer Dataset}
 \format{
-A list 
+A list of 153 patient-specific lists, each containing multiplex imaging data with the following components:
 \describe{
-  \item{variable1}{Description of variable1}
-  \item{variable2}{Description of variable2}
-  \item{variable3}{Description of variable3}
+  \item{X}{A list of vectors representing local neighborhoods; each vector specifies the cell types observed within that neighborhood.}
+  \item{nbd.sizes}{A vector indicating the number of cells present in each local neighborhood.}
+  \item{coord}{A matrix with rows representing spatial coordinates for each local neighborhood.}
 }
+}
+\source{
+https://doi.org/10.1016/j.jtho.2021.05.004
 }
 \usage{
 NSCLC
 }
 \description{
-A dataset of multiplex immunohistochemistry images of tissue sections from 153 patients with non-small cell lung cancer.
+A pre-processed dataset containing multiplex immunohistochemistry imaging data from tissue sections of 153 patients with non-small cell lung cancer.
 }
 \keyword{datasets}
